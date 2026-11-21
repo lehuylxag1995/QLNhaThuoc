@@ -7,10 +7,10 @@ import DateTimePicker, {
   DateTimePickerChangeEvent,
 } from "@expo/ui/community/datetime-picker";
 import { useRef } from "react";
-import FormField from "./base/FormField";
-import FormInput, { FormInputProps } from "./base/FormInput";
+import BaseInput, { BaseInputProps } from "./base/BaseInput";
+import FieldWrapper from "./base/FieldWrapper";
 
-type FormDateProps = FormInputProps & {
+export type DatePickerFieldProps = BaseInputProps & {
   title?: string;
   required?: boolean;
 
@@ -18,21 +18,21 @@ type FormDateProps = FormInputProps & {
   handleOnValueChange: (event: DateTimePickerChangeEvent, date: Date) => void;
 };
 
-export default function FormDate({
+export default function DatePickerField({
   title,
   required,
 
   date,
   handleOnValueChange,
 
-  ...formInputProps
-}: FormDateProps) {
+  ...baseInputProps
+}: DatePickerFieldProps) {
   const modalDateRef = useRef<BottomSheetModal>(null);
 
   return (
-    <FormField title={title} required={required}>
-      <FormInput
-        {...formInputProps}
+    <FieldWrapper title={title} required={required}>
+      <BaseInput
+        {...baseInputProps}
         editable={false}
         onPress={() => modalDateRef.current?.present()}
         value={date.toLocaleDateString("vi-VN")}
@@ -48,6 +48,6 @@ export default function FormDate({
           />
         </BottomSheetView>
       </BottomSheetModal>
-    </FormField>
+    </FieldWrapper>
   );
 }

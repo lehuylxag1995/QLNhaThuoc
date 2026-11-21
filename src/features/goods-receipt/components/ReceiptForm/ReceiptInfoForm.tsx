@@ -1,7 +1,7 @@
-import FormDate from "@/components/ui/form/FormDate";
+import DatePickerField from "@/components/ui/form/DatePickerField";
 import { FormGroup } from "@/components/ui/form/FormGroup";
-import FormSelect from "@/components/ui/form/FormSelect";
-import FormText from "@/components/ui/form/FormText";
+import { default as SelectField } from "@/components/ui/form/SelectField";
+import TextField from "@/components/ui/form/TextField";
 import { LIST_REASON, LIST_SOURCE_BRANCH } from "@/constants/contant";
 import { colors } from "@/constants/theme";
 import SupplierSelect from "@/features/supplier/components/SupplierSelect";
@@ -17,13 +17,13 @@ import { useState } from "react";
 import { View } from "react-native";
 
 export default function ReceiptInfoForm() {
+  const [date, setDate] = useState(new Date());
   const [reasonId, setReason] = useState<string | number>();
   const [supplierId, setSupplierId] = useState<number>();
-  const [date, setDate] = useState(new Date());
 
   return (
     <FormGroup Icon={ClipboardList} title="Thông tin phiếu nhập">
-      <FormDate
+      <DatePickerField
         title="Ngày nhập hàng"
         required={true}
         Icon={Calendar1}
@@ -34,26 +34,20 @@ export default function ReceiptInfoForm() {
         }}
       />
 
-      <FormSelect
+      <SelectField
         title="Lý do nhập"
-        placeholder="Chọn lý do nhập"
         required={true}
         Icon={Truck}
         options={LIST_REASON}
         value={reasonId}
-        handleChangeValue={(date) => {
-          setReason(date);
+        placeholder="Chọn lý do nhập"
+        handlePickerOnChangeValue={(value) => {
+          setReason(value);
         }}
-        handleReset={() => setReason(undefined)}
+        handlePickerOnReset={() => setReason(undefined)}
       />
 
-      {reasonId === LIST_REASON[0].value && (
-        <SupplierSelect
-          value={supplierId}
-          handleChangeValue={setSupplierId}
-          handleReset={() => setSupplierId(undefined)}
-        />
-      )}
+      {reasonId === LIST_REASON[0].value && <SupplierSelect />}
 
       {reasonId === LIST_REASON[3].value && (
         <View
@@ -63,45 +57,45 @@ export default function ReceiptInfoForm() {
           }}
         >
           <View style={{ flex: 1, gap: 10 }}>
-            <FormSelect
+            <SelectField
               title="Chi nhánh xuất hàng"
               placeholder="Chọn chi nhánh xuất hàng"
               options={LIST_SOURCE_BRANCH}
               Icon={Building2}
               IconColor={colors.info}
-              handleChangeValue={() => console.log(123)}
+              handlePickerOnChangeValue={() => console.log(123)}
             />
-            <FormSelect
+            <SelectField
               title="Kho xuất hàng"
               placeholder="Chọn kho xuất"
               options={LIST_SOURCE_BRANCH}
               Icon={Warehouse}
               IconColor={colors.info}
-              handleChangeValue={() => console.log(123)}
+              handlePickerOnChangeValue={() => console.log(123)}
             />
           </View>
           <View style={{ flex: 1, gap: 10 }}>
-            <FormSelect
+            <SelectField
               title="Chi nhánh nhập hàng"
               placeholder="Chọn chi nhánh nhập hàng"
               options={LIST_SOURCE_BRANCH}
               Icon={Building2}
               IconColor={colors.warning}
-              handleChangeValue={() => console.log(123)}
+              handlePickerOnChangeValue={() => console.log(123)}
             />
-            <FormSelect
+            <SelectField
               title="Kho nhập hàng"
               placeholder="Chọn kho nhập"
               options={LIST_SOURCE_BRANCH}
               Icon={Warehouse}
               IconColor={colors.warning}
-              handleChangeValue={() => console.log(123)}
+              handlePickerOnChangeValue={() => console.log(123)}
             />
           </View>
         </View>
       )}
 
-      <FormText
+      <TextField
         title="Số chứng từ"
         required={true}
         Icon={NotepadText}

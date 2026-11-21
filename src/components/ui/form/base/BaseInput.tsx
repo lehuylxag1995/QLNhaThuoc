@@ -1,20 +1,27 @@
 import { colors } from "@/constants/theme";
+import { BottomSheetTextInput } from "@expo/ui/community/bottom-sheet";
 import { ChevronDown, LucideIcon } from "lucide-react-native";
 import { TextInput, TextInputProps, View } from "react-native";
+import { useInSheet } from "./InSheetContext";
 
-export type FormInputProps = TextInputProps & {
+export type BaseInputProps = TextInputProps & {
   Icon?: LucideIcon;
   IconColor?: string;
   showChevron?: boolean;
+  invalid?: boolean; // true -> viền đỏ
 };
 
-export default function FormInput({
+export default function BaseInput({
   Icon,
   IconColor = colors.success,
   showChevron = false,
+  invalid,
   style,
-  ...rest // toàn bộ prop native của TextInput
-}: FormInputProps) {
+  ...rest // toàn bộ prop native của TextInputProps
+}: BaseInputProps) {
+  const inSheet = useInSheet();
+  const InputComponent = inSheet ? BottomSheetTextInput : TextInput;
+
   return (
     <View style={{ justifyContent: "center" }}>
       {Icon && (
@@ -23,10 +30,11 @@ export default function FormInput({
           size={20}
           color={IconColor}
           strokeWidth={2}
+          pointerEvents="none"
         />
       )}
 
-      <TextInput
+      <InputComponent
         {...rest}
         maxFontSizeMultiplier={1.2}
         placeholderTextColor={colors.border}
@@ -34,9 +42,9 @@ export default function FormInput({
           {
             borderWidth: 1,
             borderRadius: 14,
-            borderColor: colors.border,
+            borderColor: invalid ? colors.error : colors.border,
             padding: 10,
-            paddingLeft: 40, // chừa chỗ cho icon
+            paddingLeft: Icon ? 40 : 15, // chừa chỗ cho icon
             fontSize: 14,
           },
           style,

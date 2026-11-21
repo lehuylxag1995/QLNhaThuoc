@@ -1,36 +1,58 @@
 // chọn và thêm nhà cung cấp
 
-import FormSelect from "@/components/ui/form/FormSelect";
-import { LIST_SUPPLIERS } from "@/constants/contant";
+import ConfirmDialog from "@/components/ui/ConfirmDialog";
+import FormSelect from "@/components/ui/form/SelectField";
+import { LIST_SUPPLIERS, SelectOptions } from "@/constants/contant";
+import { showSuccess } from "@/utils/toasts";
 import { HousePlus } from "lucide-react-native";
 import { useState } from "react";
 import SupplierForm from "./SupplierForm";
 
-type SupplierSelectProps = {
-  value?: number;
-  handleChangeValue: (value: number) => void;
-  handleReset?: () => void;
-};
+export default function SupplierSelect() {
+  const [supplierId, setSupplierId] = useState<number>();
+  const [deletingSupplier, setDeletingSupplier] =
+    useState<SelectOptions<number> | null>(null);
 
-export default function SupplierSelect({
-  value,
-  handleChangeValue,
-  handleReset,
-}: SupplierSelectProps) {
-  const [suppliers, setSuppliers] = useState(LIST_SUPPLIERS);
+  const openEditSupplier = (item: SelectOptions<number>) => {
+    console.log("Sua", item.value);
+  };
+
+  const confirmDeleteSupplier = (item: SelectOptions<number>) => {
+    setDeletingSupplier(item);
+  };
+
+  const handleDelete = () => {
+    if (!deletingSupplier) return;
+    if (deletingSupplier.value === supplierId) setSupplierId(undefined);
+    setDeletingSupplier(null);
+    showSuccess("Nhà cung cấp", "Đã xoá nhà cung cấp thành công");
+  };
 
   return (
-    <FormSelect<number>
-      title="Nhà cung cấp"
-      Icon={HousePlus}
-      placeholder="Chọn nhà cung cấp"
-      options={suppliers}
-      handleReset={handleReset}
-      handleChangeValue={handleChangeValue}
-      value={value}
-      addPressLabel="Thêm nhà cung cấp"
-      required={false} // Do nghiệp vụ biết rõ không bắt buộc hiện *
-      renderCreateView={({ onBack, onCreated }) => <SupplierForm />}
-    />
+    <>
+      <FormSelect<number>
+        title="Nhà cung cấp"
+        value={supplierId}
+        Icon={HousePlus}
+        placeholder="Chọn nhà cung cấp"
+        options={LIST_SUPPLIERS}
+        handlePickerOnReset={() => setSupplierId(undefined)}
+        handlePickerOnChangeValue={setSupplierId}
+        labelPickerButtonAdd="Thêm nhà cung cấp"
+        handlePickerRenderCreateView={({ onBack, onCreated }) => (
+          <SupplierForm onBack={onBack} onCreated={onCreated} />
+        )}
+        handlePickerOnDelete={confirmDeleteSupplier}
+        handlePickerOnEdit={openEditSupplier}
+      />
+
+      <ConfirmDialog
+        visible={!!deletingSupplier}
+        title="Xoá nhà cung cấp?"
+        message={`“${deletingSupplier?.label}” sẽ bị xoá khỏi danh sách.`}
+        onConfirm={handleDelete}
+        onCancel={() => setDeletingSupplier(null)}
+      />
+    </>
   );
 }

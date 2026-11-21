@@ -11,9 +11,10 @@ import {
 } from "react-native";
 import Typography from "../Typography";
 
-type FormGroupProps = Omit<ViewProps, "style | children"> & {
+export type FormGroupProps = Omit<ViewProps, "style " | "children"> & {
   Icon?: LucideIcon;
   IconColor?: string;
+  IconStrokeWidth?: number;
   title?: string;
   required?: boolean;
   showButton?: boolean;
@@ -32,6 +33,7 @@ export function FormGroup({
   Icon,
   required = false,
   IconColor = colors.success,
+  IconStrokeWidth,
   showButton,
   showButtonTitle,
   showButtonOnPress,
@@ -67,7 +69,9 @@ export function FormGroup({
           }}
         >
           <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
-            {Icon && <Icon size={25} strokeWidth={3} color={IconColor} />}
+            {Icon && (
+              <Icon size={25} strokeWidth={IconStrokeWidth} color={IconColor} />
+            )}
 
             {title && (
               <Typography style={{ fontWeight: "bold", fontSize: 15 }}>
