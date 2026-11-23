@@ -1,7 +1,7 @@
 // chọn và thêm nhà cung cấp
 
-import ConfirmDialog from "@/components/ui/ConfirmDialog";
-import FormSelect from "@/components/ui/form/SelectField";
+import ConfirmDialog from "@/components/ConfirmDialog";
+import FormSelect from "@/components/form/SelectField";
 import { LIST_SUPPLIERS, SelectOptions } from "@/constants/contant";
 import { showSuccess } from "@/utils/toasts";
 import { HousePlus } from "lucide-react-native";

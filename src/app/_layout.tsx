@@ -5,28 +5,18 @@ import { Toaster } from "sonner-native";
 export default function RootLayout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="nhap-hang/index" options={{ headerShown: false }} />
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="(tabs)" />
         <Stack.Screen
-          name="nhap-hang/good-receipt"
-          options={{ headerShown: false }}
+          name="stock-in/create"
+          options={{ presentation: "card" }}
         />
-
-        <Stack.Screen name="xuat-hang/index" options={{ headerShown: false }} />
-        <Stack.Screen name="kiem-hang/index" options={{ headerShown: false }} />
-
-        {/* <Stack.Screen name="camera" /> */}
-        {/* <Stack.Screen
-        name="(tabs)/kho/nhap/index"
-        options={{ headerShown: false }}
-      /> */}
-        {/* <Stack.Screen name="invoice/add" options={{ headerShown: false }} />
-      <Stack.Screen name="invoice/medicines" options={{ headerShown: false }} />
-      <Stack.Screen name="invoice/confirm" options={{ headerShown: false }} />
-
-      <Stack.Screen name="medicine/add" options={{ headerShown: false }} /> */}
+        <Stack.Screen
+          name="stock-in/add-item"
+          options={{ presentation: "card" }}
+        />
       </Stack>
+
       <Toaster
         position="top-center"
         duration={6000}

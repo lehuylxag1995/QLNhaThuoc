@@ -1,7 +1,7 @@
-import ButtonCustom from "@/components/ui/ButtonCustom";
-import { FormGroup } from "@/components/ui/form/FormGroup";
-import ControlledTextField from "@/components/ui/form/react-hook-form/ControlledTextField";
-import Typography from "@/components/ui/Typography";
+import ButtonCustom from "@/components/ButtonCustom";
+import { FormGroup } from "@/components/form/FormGroup";
+import ControlledTextField from "@/components/form/react-hook-form/ControlledTextField";
+import Typography from "@/components/Typography";
 import { BottomSheetScrollView } from "@expo/ui/community/bottom-sheet";
 import { ArrowLeft, HouseHeart, Save } from "lucide-react-native";
 import { Pressable, View } from "react-native";

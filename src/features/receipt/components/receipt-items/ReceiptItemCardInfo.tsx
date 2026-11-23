@@ -1,18 +1,18 @@
-import Typography from "@/components/ui/Typography";
+import Typography from "@/components/Typography";
 import { colors } from "@/constants/theme";
 import { View } from "react-native";
 
-type InfoCellProps = {
+type ReceiptItemCardInfoProps = {
   title: string;
   value?: string | number;
   valueColor?: string;
 };
 
-export default function MedicineItemInfo({
+export default function ReceiptItemCardInfo({
   title,
   value,
   valueColor = "black",
-}: InfoCellProps) {
+}: ReceiptItemCardInfoProps) {
   return (
     <View
       style={{

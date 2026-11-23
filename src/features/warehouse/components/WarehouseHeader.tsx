@@ -1,4 +1,4 @@
-import Typography from "@/components/ui/Typography";
+import Typography from "@/components/Typography";
 import { themeStyle } from "@/constants/theme";
 import { Search } from "lucide-react-native";
 import { View } from "react-native";

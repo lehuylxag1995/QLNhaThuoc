@@ -12,7 +12,7 @@ export default function QuickActions() {
         title="Nhập kho"
         Icon={PackagePlus}
         description="Tạo phiếu"
-        handleNavigateScreen={() => router.push("/nhap-hang/good-receipt")}
+        handleNavigateScreen={() => router.push("/stock-in/create")}
         variant="info"
       />
       <HubKho

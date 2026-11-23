@@ -2,10 +2,10 @@ import { colors } from "@/constants/theme";
 import { PenLine, Pill, Trash } from "lucide-react-native";
 import { View } from "react-native";
 
-import Typography from "@/components/ui/Typography";
-import MedicineItemInfo from "./MedicineItemInfo";
+import Typography from "@/components/Typography";
+import ReceiptItemCardInfo from "./ReceiptItemCardInfo";
 
-type CardInfoProps = {
+type ReceiptItemCardProps = {
   name: string;
   idMedicine: string | number;
 
@@ -15,14 +15,14 @@ type CardInfoProps = {
   hansudung: string;
 };
 
-export default function MedicineItemCard({
+export default function ReceiptItemCard({
   name,
   idMedicine,
   donvitinh,
   hansudung,
   solo,
   soluong,
-}: CardInfoProps) {
+}: ReceiptItemCardProps) {
   return (
     <View
       style={{
@@ -92,14 +92,14 @@ export default function MedicineItemCard({
           gap: 8,
         }}
       >
-        <MedicineItemInfo title="Đơn vị tính" value={donvitinh} />
-        <MedicineItemInfo
+        <ReceiptItemCardInfo title="Đơn vị tính" value={donvitinh} />
+        <ReceiptItemCardInfo
           title="Số lượng"
           value={soluong}
           valueColor={colors.success}
         />
-        <MedicineItemInfo title="Số lô sản xuất" value={solo} />
-        <MedicineItemInfo title="Hạn sử dụng" value={hansudung} />
+        <ReceiptItemCardInfo title="Số lô sản xuất" value={solo} />
+        <ReceiptItemCardInfo title="Hạn sử dụng" value={hansudung} />
       </View>
     </View>
   );

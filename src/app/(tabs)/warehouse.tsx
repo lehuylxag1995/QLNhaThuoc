@@ -1,7 +1,7 @@
-import Typography from "@/components/ui/Typography";
+import Typography from "@/components/Typography";
 import { colors, themeStyle } from "@/constants/theme";
 
-import Badge from "@/components/ui/Badge";
+import Badge from "@/components/Badge";
 import { blurhash } from "@/constants/contant";
 import QuickActions from "@/features/warehouse/components/QuickActions";
 import SyncSummary from "@/features/warehouse/components/SyncSummary";

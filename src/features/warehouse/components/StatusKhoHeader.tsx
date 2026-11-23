@@ -1,4 +1,4 @@
-import Typography from "@/components/ui/Typography";
+import Typography from "@/components/Typography";
 import { colors } from "@/constants/theme";
 import { ChevronRight, RefreshCcw } from "lucide-react-native";
 import { View } from "react-native";
