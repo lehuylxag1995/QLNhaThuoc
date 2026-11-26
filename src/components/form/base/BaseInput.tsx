@@ -1,26 +1,34 @@
 import { colors } from "@/constants/theme";
 import { BottomSheetTextInput } from "@expo/ui/community/bottom-sheet";
-import { ChevronDown, LucideIcon } from "lucide-react-native";
-import { TextInput, TextInputProps, View } from "react-native";
+import { ChevronDown, LucideIcon, XCircle } from "lucide-react-native";
+import { Pressable, TextInput, TextInputProps, View } from "react-native";
 import { useInSheet } from "./InSheetContext";
 
 export type BaseInputProps = TextInputProps & {
   Icon?: LucideIcon;
   IconColor?: string;
-  showChevron?: boolean;
   invalid?: boolean; // true -> viền đỏ
+  showChevron?: boolean;
+  showClearButton?: boolean;
 };
 
 export default function BaseInput({
+  //BaseInputProps
   Icon,
   IconColor = colors.success,
-  showChevron = false,
   invalid,
+  showChevron = false,
+  showClearButton = false,
+
+  // TextInputProps
+  value,
+  onChangeText,
   style,
   ...rest // toàn bộ prop native của TextInputProps
 }: BaseInputProps) {
   const inSheet = useInSheet();
   const InputComponent = inSheet ? BottomSheetTextInput : TextInput;
+  const canClear = showClearButton && !!value;
 
   return (
     <View style={{ justifyContent: "center" }}>
@@ -49,7 +57,19 @@ export default function BaseInput({
           },
           style,
         ]}
+        value={value}
+        onChangeText={onChangeText}
       />
+
+      {canClear && (
+        <Pressable
+          style={{ position: "absolute", right: 12, zIndex: 1 }}
+          onPress={() => onChangeText?.("")}
+          hitSlop={10}
+        >
+          <XCircle strokeWidth={1} color={colors.border} />
+        </Pressable>
+      )}
 
       {showChevron && (
         <ChevronDown

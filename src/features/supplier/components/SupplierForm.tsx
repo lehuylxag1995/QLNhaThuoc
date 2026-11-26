@@ -54,7 +54,8 @@ export default function SupplierForm({
         style={{ flex: 1 }}
         contentContainerStyle={{ paddingBottom: 15 }}
         showsVerticalScrollIndicator={false}
-        keyboardShouldPersistTaps="handled"
+        keyboardShouldPersistTaps="handled" // chạm vào vùng trống thì đóng bàn phím.
+        keyboardDismissMode="on-drag" // kéo/cuộn thì đóng bàn phím luôn
       >
         <FormGroup Icon={HouseHeart} title="Thông tin nhà cung cấp">
           <ControlledTextField

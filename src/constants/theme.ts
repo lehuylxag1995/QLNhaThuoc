@@ -34,6 +34,7 @@ export const colors = {
   infoBackground: "#E7EEFA",
   warning: "#F59E0B",
   warningBackground: "#FAF1E1",
+  warningBackground2: "#c78107",
   error: "#EF4444",
   errorBackground: "#FCF0F0",
   purple: "#8B5CF6",
